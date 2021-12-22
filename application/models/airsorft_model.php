@@ -1,9 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
-
-class laptop_model extends CI_Model
+class airsoft_model extends CI_Model
 {
 
   public function __construct()
@@ -14,24 +12,24 @@ class laptop_model extends CI_Model
   public function get($id = null, $limit = 5, $offset = 0)
   {
     if ($id === null) {
-      return $this->db->get('tb_laptop', $limit, $offset)->result();
+      return $this->db->get('tb_airsoft', $limit, $offset)->result();
     } else {
-      return $this->db->get_where('tb_laptop', ['id' => $id])->result_array();
+      return $this->db->get_where('tb_airsoft', ['id_model' => $id])->result_array();
     }
   }
 
   public function count()
   {
-    return $this->db->get('tb_laptop')->num_rows();
+    return $this->db->get('tb_airsoft')->num_rows();
   }
 
   public function add($data)
   {
     try {
-      $this->db->insert('tb_laptop', $data);
+      $this->db->insert('tb_airsoft', $data);
       $error = $this->db->error();
       if (!empty($error['code'])) {
-        throw new Exception('Terjadi kesalahan: ' . $error['message']);
+        throw new Exception('ERROR: ' . $error['message']);
         return false;
       }
       return ['status' => true, 'data' => $this->db->affected_rows()];
@@ -43,10 +41,10 @@ class laptop_model extends CI_Model
   public function update($id, $data)
   {
     try {
-      $this->db->update('tb_laptop', $data, ['id' => $id]);
+      $this->db->update('tb_airsoft', $data, ['id_model' => $id]);
       $error = $this->db->error();
       if (!empty($error['code'])) {
-        throw new Exception('Terjadi kesalahan: ' . $error['message']);
+        throw new Exception('ERROR: ' . $error['message']);
         return false;
       }
       return ['status' => true, 'data' => $this->db->affected_rows()];
@@ -58,10 +56,10 @@ class laptop_model extends CI_Model
   public function delete($id)
   {
     try {
-      $this->db->delete('tb_laptop', ['id' => $id]);
+      $this->db->delete('tb_airsoft', ['id_model' => $id]);
       $error = $this->db->error();
       if (!empty($error['code'])) {
-        throw new Exception('Terjadi kesalahan: ' . $error['message']);
+        throw new Exception('ERROR: ' . $error['message']);
         return false;
       }
       return ['status' => true, 'data' => $this->db->affected_rows()];
@@ -70,6 +68,3 @@ class laptop_model extends CI_Model
     }
   }
 }
-
-/* End of file Mahasiswa_model.php */
-/* Location: ./application/models/Mahasiswa_model.php */
