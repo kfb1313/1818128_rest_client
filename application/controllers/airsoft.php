@@ -5,7 +5,6 @@ use chriskacerguis\RestServer\RestController;
 
 class airsoft extends RestController
 {
-
   public function __construct()
   {
     parent::__construct();
@@ -23,6 +22,7 @@ class airsoft extends RestController
       $total_page = ceil($total_data / 5);
       $start = ($p - 1) * 5;
       $list = $this->ars->get(null, 5, $start);
+      
       if ($list) {
         $data = [
           'status' => true,
